@@ -1,0 +1,35 @@
+* {
+    font: bold 10px galvji, verdana, sans-serif;
+}
+
+.input {
+    border-radius: 5px;
+    height: 25px;
+    margin: 5px;
+  }
+  
+  .standar-button {
+    width: 15%;
+    height: 30px;
+    border-radius: 5%;
+    border: 1px solid black;
+    color: black;
+    margin-left: 10px;
+  }
+  
+  .standar-button:hover {
+    box-shadow: 2px 2px 2px black;
+}
+
+.standar-button:active ,
+.standar-button.selected  {
+    transform: scale(1.1);
+    box-shadow: 2px 2px 2px black;
+    background-color: lightpink;
+  }
+  
+  @font-face {
+    font-family: "galvji";
+    src: url(../fonts/Galvji.ttc);
+  }
+  

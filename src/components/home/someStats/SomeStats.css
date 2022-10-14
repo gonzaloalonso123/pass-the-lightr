@@ -1,0 +1,25 @@
+.some-stats-container{
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    text-align: center;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+    max-width: 100vw;
+}
+.someStat{
+    border-radius: 50%;
+    background-color: white;
+    height: 30vw;
+    width: 30vw;
+    margin: auto 1vw;
+    max-height: 200px;
+    max-width: 200px;
+    flex-direction: column;
+    display: flex;
+    border: 1px solid black;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 5px 5px 5px black;
+    font-size: 1.4em;
+}

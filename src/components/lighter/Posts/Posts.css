@@ -1,0 +1,31 @@
+.posts {
+    width: 90%;
+    background-color: white;
+    border-radius: 10px;
+    max-width: 600px;
+    border: 2px  solid black;
+}
+
+.posts-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 5vh;
+}
+
+.post{
+    padding: 10px;
+}
+
+.message {
+    font-weight: 100;
+}
+
+.username {
+    font-weight: bold;
+}
+
+.date {
+    color: grey;
+}

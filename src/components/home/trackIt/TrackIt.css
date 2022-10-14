@@ -1,0 +1,13 @@
+.track-it-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20%;
+  margin-top: 3vh;
+  margin-bottom: 3vh;
+}
+
+.error {
+  text-align: center;
+  color: aliceblue;
+}

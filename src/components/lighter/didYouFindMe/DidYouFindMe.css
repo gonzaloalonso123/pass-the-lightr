@@ -1,0 +1,38 @@
+.questions-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        color: white;
+}
+
+@keyframes appear {
+    0% {
+        height :0;
+    }
+    100% {
+        height: auto;
+    }
+}
+
+.questions-container h1{
+    font-size: 2em;
+    text-align: center;
+}
+
+.button-container{
+    display: flex;
+    flex-direction: row;
+    max-width: 700px;
+    padding-top: 5vh;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.input.how{
+    width: 90%;
+    height: 200px;
+    padding: 10px;
+    max-width: 600px;
+}
