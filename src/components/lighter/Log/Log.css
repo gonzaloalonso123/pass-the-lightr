@@ -1,5 +1,28 @@
-.xdprueba {
-    background-color: green;
-    width: 100px;
-    height: 100px;
+.logs {
+    width: 90%;
+    background-color: white;
+    border-radius: 10px;
+    max-width: 600px;
+    border: 2px  solid black;
+}
+
+.logs-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 5vh;
+}
+
+.logs{
+    padding: 10px;
+}
+
+
+.username {
+    font-weight: bold;
+}
+
+.date {
+    color: grey;
 }

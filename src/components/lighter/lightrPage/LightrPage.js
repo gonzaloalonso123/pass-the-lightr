@@ -11,7 +11,7 @@ import Posts from "../Posts/Posts";
 import NameTheLighter from "../nameTheLighter/NameTheLighter";
 import Database from "../../../database/db-connection";
 import ForumLogPicker from "../ForumLogPicker/ForumLogPicker";
-import Log from "../Log/Log";
+import Logs from "../Log/Logs";
 import "./LightrPage.css";
 import { doc, onSnapshot } from "firebase/firestore";
 
@@ -90,7 +90,7 @@ function LightrPage() {
         {submited && <ForumLogPicker setLogOrForum={setLogOrForum} />}
         {LogOrForum === "forum" && <Message id={id.id} nickName={userName} />}
         {LogOrForum === "forum" && <Posts posts={lighter.messages} />}
-        {LogOrForum === "log" && <Log />}
+        {LogOrForum === "log" && <Logs logs={lighter.log}/>}
       </div>
     </div>
   );
