@@ -7,6 +7,8 @@ import {
   doc,
   setDoc,
   getDoc,
+  arrayUnion,
+  updateDoc,
 } from "firebase/firestore";
 import writeXlsxFile from "write-excel-file";
 
@@ -25,6 +27,13 @@ export default class databaseAccess {
     this.db = getFirestore(this.app);
   }
 
+  async getAmountOfLighters() {
+    const querySnapshot = await getDocs(collection(this.db, "lighters"));
+    return querySnapshot._snapshot.docChanges.length;
+  }
+
+  saveLog() {}
+
   async getLighters() {
     // const lightersCol = collection(this.db, "lighters");
     // const lightersSnapShot = await getDocs(lightersCol);
@@ -37,7 +46,10 @@ export default class databaseAccess {
     });
 
     return lighters;
-    // return lighterList;
+  }
+
+  async getOneLighter(id) {
+    return doc(this.db, "lighters", id);
   }
 
   async createLighter(userId) {
@@ -46,7 +58,7 @@ export default class databaseAccess {
       locations: [],
       messages: [],
       id: userId,
-      log : []
+      log: [],
     });
   }
 
@@ -55,64 +67,93 @@ export default class databaseAccess {
     setDoc(lighterRef, { nickname: nickname }, { merge: true });
   }
 
+  // async postMessage(id, message, nickName) {
+  //   const docRef = doc(this.db, "lighters", id);
+  //   const docSnap = await getDoc(docRef);
+  //   let messages = [];
+  //   let date = new Date();
+  //   let stringDate = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
+  //   if (docSnap.exists()) {
+  //     messages = docSnap.data().messages;
+  //     messages.push({
+  //       nickname: nickName,
+  //       message: message,
+  //       date: stringDate,
+  //     });
+  //   } else {
+  //     console.log("No such document!");
+  //   }
+  //   const lighterRef = doc(this.db, "lighters", id);
+  //   await setDoc(lighterRef, { messages: messages }, { merge: true });
+  // }
+
+  getDb() {
+    return this.db;
+  }
+
   async postMessage(id, message, nickName) {
-    const docRef = doc(this.db, "lighters", id);
-    const docSnap = await getDoc(docRef);
-    let messages = [];
     let date = new Date();
     let stringDate = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
-    if (docSnap.exists()) {
-      messages = docSnap.data().messages;
-      messages.push({
+    const lightersRef = doc(this.db, "lighters", id);
+    await updateDoc(lightersRef, {
+      messages: arrayUnion({
         nickname: nickName,
         message: message,
         date: stringDate,
-      });
-    } else {
-      console.log("No such document!");
-    }
-    const lighterRef = doc(this.db, "lighters", id);
-    await setDoc(lighterRef, { messages: messages }, { merge: true });
-  }
-
-  async randomCodeGenerator(number) {
-    let objects = [];
-    for (let i = 0; i < number; i++) {
-      let code = window
-        .btoa(
-          String.fromCharCode(
-            ...window.crypto.getRandomValues(new Uint8Array(5 * 2))
-          )
-        )
-        .replace(/[+/]/g, "")
-        .substring(0, 5)
-        .toUpperCase();
-      let repeated = false;
-      objects.forEach(obj => {
-        if (obj.id === code) {
-          repeated = true;
-          i++;
-          console.log('repeated!!!!', obj.id, code);
-        }
-      })
-
-      if (!repeated) {
-        objects.push({ id: code });
-      }
-    }
-    const schema = [
-      {
-        column: "id",
-        type: String,
-        value: (lighter) => lighter.id,
-      },
-    ];
-    await writeXlsxFile(objects, {
-      schema,
-      fileName: "./file.xlsx",
+      }),
     });
-    objects.forEach(o => {
-      this.createLighter(o.id);
-    })
   }
+
+  async submitLog (id, nickname, how, when, where) 
+  {
+    const lightersRef = doc(this.db, "lighters", id);
+    await updateDoc(lightersRef, {
+      logs: arrayUnion({
+        nickname : nickname,
+        how : how,
+        when : when,
+        where : where
+      }),
+    });
+  }
+  // async randomCodeGenerator(number) {
+  //   let objects = [];
+  //   for (let i = 0; i < number; i++) {
+  //     let code = window
+  //       .btoa(
+  //         String.fromCharCode(
+  //           ...window.crypto.getRandomValues(new Uint8Array(5 * 2))
+  //         )
+  //       )
+  //       .replace(/[+/]/g, "")
+  //       .substring(0, 5)
+  //       .toUpperCase();
+  //     let repeated = false;
+  //     objects.forEach(obj => {
+  //       if (obj.id === code) {
+  //         repeated = true;
+  //         i++;
+  //         console.log('repeated!!!!', obj.id, code);
+  //       }
+  //     })
+
+  //     if (!repeated) {
+  //       objects.push({ id: code });
+  //     }
+  //   }
+  //   const schema = [
+  //     {
+  //       column: "id",
+  //       type: String,
+  //       value: (lighter) => lighter.id,
+  //     },
+  //   ];
+  //   await writeXlsxFile(objects, {
+  //     schema,
+  //     fileName: "./file.xlsx",
+  //   });
+  //   objects.forEach(o => {
+  //     this.createLighter(o.id);
+  //   })
+  // }
 }

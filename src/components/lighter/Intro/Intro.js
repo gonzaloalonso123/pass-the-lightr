@@ -26,16 +26,20 @@ function Intro({
   };
 
   return (
-    <div className="intro-container">
+    <div className="lighterPageSection">
       <img src={LighterImg} alt="" className="lighter-img" />
-      <div className="who-are-you-container">
-        <h2>Hi! Im lighter {nickname}, who are you?</h2>
-        <div className="who-are-you-input-container">
-          <input type="text" className="input" defaultValue="NickName" onChange={handleInput}/>
-          <button className="standar-button" onClick={handleClick}>
-            <AiOutlineArrowRight />
-          </button>
-        </div>
+      <h1>Hi! Im lighter {nickname}, who are you?</h1>
+      <div className="who-are-you-input-container">
+        <input
+          type="text"
+          className="input"
+          defaultValue="NickName"
+          onChange={handleInput}
+        />
+        <button className="standar-button" onClick={handleClick}>
+          Log In!
+          <AiOutlineArrowRight />
+        </button>
       </div>
     </div>
   );

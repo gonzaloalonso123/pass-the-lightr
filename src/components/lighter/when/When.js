@@ -6,7 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 function When({ datePicked, setDatePicked }) {
   return (
-    <div className="questions-container date-picker">
+    <div className="lighterPageSection">
       <h1>When did you get it?</h1>
       <div className="date-container">
         <DatePicker

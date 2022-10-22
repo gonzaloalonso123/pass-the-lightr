@@ -1,0 +1,29 @@
+.standar-button.submit {
+  transition: 0.3;
+}
+
+.standar-button.submit.selected {
+  pointer-events: none;
+}
+
+.lighterPageSection h1 {
+  font-size: 2em;
+  text-align: center;
+  color: white;
+  margin: 30px;
+
+}
+
+
+.lighterPageSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.lighterPageSection.horizontal {
+    flex-direction: row;
+}

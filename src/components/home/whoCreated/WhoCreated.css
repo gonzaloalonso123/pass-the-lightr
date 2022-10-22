@@ -1,18 +1,32 @@
+.who-created h2, .who-created .title, .who-created p {
+    color: white;
+}
+
+.who-created {
+    width: 90%;
+    max-width: 650px;
+}
+
 .who-created-container {
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: left;
+    padding-bottom: 50px;
 }
 
-.who-created-text-container{
-    font-size: 1.4em;
-    color: white;
-    max-width: 800px;
-    margin: 20px;
+.who-created h2 {
+    font-size: 3em;
+    text-align: center;
 }
 
-.who-created-container h2 {
-    font-size: 1.6em;
+.who-created .title{
+    font-size: 2em;
+    display: block;
+    text-align: center;
+    font-weight: bolder;
+}
+
+.who-created p {
+    font-size: 1.5em;
     text-align: center;
 }

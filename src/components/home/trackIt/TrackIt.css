@@ -2,9 +2,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 20%;
+  height: 50%;
   margin-top: 3vh;
   margin-bottom: 3vh;
+}
+
+.track-it-container button{
+  width: 40%;
+}
+
+.track-it-container input {
+  width: 40%;
 }
 
 .error {

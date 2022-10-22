@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import MapPicker from "react-google-map-picker";
 import "./Where.css";
@@ -6,7 +6,7 @@ import "./Where.css";
 const DefaultLocation = { lat: 52.37, lng: 4.89 };
 const DefaultZoom = 10;
 
-const LocationPicker = ({setWhereAnswer}) => {
+const LocationPicker = ({ setWhereAnswer }) => {
   const [defaultLocation, setDefaultLocation] = useState(DefaultLocation);
   const [location, setLocation] = useState(defaultLocation);
   const [zoom, setZoom] = useState(DefaultZoom);
@@ -20,6 +20,11 @@ const LocationPicker = ({setWhereAnswer}) => {
     setZoom(newZoom);
   }
 
+  useEffect(() => window.scrollTo({
+    top: document.body.scrollHeight,
+    behavior: "smooth",
+  }))
+
   function handleResetLocation() {
     setDefaultLocation({ ...DefaultLocation });
     setZoom(DefaultZoom);
@@ -31,18 +36,29 @@ const LocationPicker = ({setWhereAnswer}) => {
         <div className="button-container location">
           {/* <button onClick={handleResetLocation}>Reset Location</button> */}
           <label>Lat:</label>
-          <input className ='input location' type="text" value={location.lat} disabled />
+          <button className="input" disabled>
+            {location.lat.toFixed(4)}
+          </button>
           <label>Lon:</label>
-          <input className ='input location' ype="text" value={location.lng} disabled />
+          <button className="input" disabled>
+            {location.lng.toFixed(4)}
+          </button>
           <label>Zoom:</label>
-          <input className ='input location' type="text" value={zoom} disabled />
+          <button className="input" disabled>
+            {zoom}
+          </button>
         </div>
         <MapPicker
           defaultLocation={defaultLocation}
           zoom={zoom}
           mapTypeId="roadmap"
           className="map"
-          style={{ height: "70vw" , width: "80vw" , maxHeight: "400px", maxWidth : "500px" }}
+          style={{
+            height: "70vw",
+            width: "80vw",
+            maxHeight: "400px",
+            maxWidth: "500px",
+          }}
           onChangeLocation={handleChangeLocation}
           onChangeZoom={handleChangeZoom}
           apiKey="AIzaSyBT5Nnzu7hHJ4CJbsSFbJkcPd_Vd15X1EY"

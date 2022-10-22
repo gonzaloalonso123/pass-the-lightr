@@ -30,7 +30,7 @@ function TrackIt({ setShowDev }) {
     setInput(event.target.value);
   };
   return (
-    <div style={{ height: "10vh" }}>
+    <div style={{ height: "15vh" }}>
       <div className="track-it-container">
         <input type="text" className="input" onChange={handleInput} />
         <button className="standar-button" onClick={validateCode}>

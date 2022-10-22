@@ -3,7 +3,7 @@ import "./DidYouFindMe.css";
 
 function DidYouFindMe({setDidYouFindMeAnswer, didYouFindMeAnswer}) {
   return (
-    <div className="questions-container">
+    <div className="lighterPageSection">
       <h1>Did you find me or got me?</h1>
       <div className="button-container">
         <button className={didYouFindMeAnswer === 'found' ? "standar-button selected" : "standar-button"} onClick={() => setDidYouFindMeAnswer('found')}>Found</button>

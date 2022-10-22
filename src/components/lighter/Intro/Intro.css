@@ -1,29 +1,31 @@
 .lighter-img {
+  margin-top: 20px;
   border-radius: 50%;
-  width: 25vw;
-  height: 25vw;
-  max-width: 200px;
-  max-height: 200px;
+  width: 35%;
+  height: 35%;
   box-shadow: 5px 5px 5px black;
   border: 1px solid black;
 }
 
-.intro-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  padding: 20px;
-}
-
-.who-are-you-container h2{
-  font-size: 1.4em;
-  color: white;
-}
-
 .who-are-you-input-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100%;
 }
 
+.who-are-you-input-container button {
+  width: 50%;
+}
+
+.who-are-you-input-container .input {
+  width: 50%;
+}
+
+.intro-container{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
