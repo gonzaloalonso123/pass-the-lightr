@@ -14,12 +14,9 @@
     padding-bottom: 5vh;
 }
 
-.post{
-    padding: 10px;
-}
-
 .message {
     font-weight: 100;
+    color: rgb(68, 67, 67);
 }
 
 .username {
@@ -27,5 +24,12 @@
 }
 
 .date {
-    color: grey;
+    color: rgb(68, 67, 67);
+}
+
+.border-bottom {
+    border-bottom: 1px solid pink;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
 }

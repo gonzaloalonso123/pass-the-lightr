@@ -26,11 +26,10 @@ const Log = ({ log }) => {
   }, []);
 
   return (
-    <div className="log">
-      <label className="tag">{log.when}</label>
-      <label className="tag">{log.nickname + " got the lighter"}</label>
-      <label className="tag">{"How?    " + log.how}</label>
-      <label className="tag">{"Where?    " + locationName}</label>
+    <div className="border-bottom">
+      <label className="date">{log.when}</label>
+      <label className="logData">{log.nickname + " got the lighter in " + locationName + "."}</label>
+      <label className="logData">{"How?    " + log.how + "." }</label>
     </div>
   );
 };

@@ -3,11 +3,11 @@ import './Posts.css';
 
 function Post({username, date, message}) {
   return (
-    <div className='post'>
-        <label className='username'>{username}</label>
-        &nbsp;&nbsp;
-        <label className='date'>{date}</label>
-        <p className='message'>{message}</p>
+    <div className='border-bottom'>
+      <div>
+      <label className='username'>{"Posted by: "+ username } <p className='message'>{message}</p></label>  
+      </div>
+      <label className='date'>{date}</label>
     </div>
   )
 }

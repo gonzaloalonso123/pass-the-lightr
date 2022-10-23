@@ -102,7 +102,7 @@ function LightrPage() {
             </button>
           </>
         )}
-        {submited && <ForumLogPicker setLogOrForum={setLogOrForum} />}
+        {submited &&  <ForumLogPicker setLogOrForum={setLogOrForum} />}
         {LogOrForum === "forum" && <Message id={id.id} nickName={userName} />}
         {LogOrForum === "forum" && <Posts posts={lighter.messages} />}
         {LogOrForum === "log" && <Logs logs={lighter.log} />}

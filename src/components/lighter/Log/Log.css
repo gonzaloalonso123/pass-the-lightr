@@ -19,15 +19,17 @@
 }
 
 
-.username {
-    font-weight: bold;
+.logData {
+   
+    color: rgb(68, 67, 67);
 }
 
 .date {
-    color: grey;
+    font-weight: bold;
+    color: black;
 }
 
-.log {
+.border-bottom {
     border-bottom: 1px solid pink;
     display: flex;
     flex-direction: column;
