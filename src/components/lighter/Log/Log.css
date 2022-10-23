@@ -26,3 +26,10 @@
 .date {
     color: grey;
 }
+
+.log {
+    border-bottom: 1px solid pink;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}

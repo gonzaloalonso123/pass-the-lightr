@@ -61,7 +61,7 @@ const LocationPicker = ({ setWhereAnswer }) => {
           }}
           onChangeLocation={handleChangeLocation}
           onChangeZoom={handleChangeZoom}
-          apiKey="AIzaSyBT5Nnzu7hHJ4CJbsSFbJkcPd_Vd15X1EY"
+          apiKey= {process.env.REACT_APP_GOOGLE_KEY}
         />
       </div>
     </>

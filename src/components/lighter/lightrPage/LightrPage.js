@@ -19,19 +19,27 @@ function LightrPage() {
   const id = useParams();
   const [showDidYouFindMe, setShowDidYouFindMe] = useState(false);
   const [showNameTheLighter, setShowNameTheLighter] = useState(false);
+  const [showMap, setShowMap] = useState(false);
   const [didYouFindMeAnswer, setDidYouFindMeAnswer] = useState("");
   const [whereAnswer, setWhereAnswer] = useState("");
   const [datePicked, setDatePicked] = useState(null);
   const [lighter, setLighter] = useState(null);
-  const [userName, setUserName] = useState("");
+  const [userName, setUserName] = useState("Anonymous");
   const [LogOrForum, setLogOrForum] = useState("");
   const [submited, setSubmited] = useState(false);
+  const [showHowInput, setShowHowInput] = useState(false);
   const database = new Database();
   const db = database.getDb();
 
   async function submit() {
     setSubmited(true);
-    database.submitLog();
+    database.submitLog(
+      id.id,
+      userName,
+      didYouFindMeAnswer,
+      datePicked,
+      whereAnswer
+    );
   }
 
   useEffect(() => {
@@ -43,7 +51,7 @@ function LightrPage() {
     } else {
       window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
     }
-  }, [whereAnswer, datePicked, submited, LogOrForum]);
+  }, [whereAnswer, datePicked, submited, LogOrForum, userName, showHowInput]);
 
   return (
     <div className="home-container">
@@ -64,10 +72,17 @@ function LightrPage() {
           <DidYouFindMe
             didYouFindMeAnswer={didYouFindMeAnswer}
             setDidYouFindMeAnswer={setDidYouFindMeAnswer}
+            setShowHowInput={setShowHowInput}
+            setShowMap={setShowMap}
           />
         )}
-        {didYouFindMeAnswer === "other" && <How />}
-        {didYouFindMeAnswer != "" && (
+        {showHowInput && (
+          <How
+            setDidYouFindMe={setDidYouFindMeAnswer}
+            setShowMap={setShowMap}
+          />
+        )}
+        {showMap && (
           <Where whereAnswer={whereAnswer} setWhereAnswer={setWhereAnswer} />
         )}
         {whereAnswer !== "" && (
@@ -90,7 +105,7 @@ function LightrPage() {
         {submited && <ForumLogPicker setLogOrForum={setLogOrForum} />}
         {LogOrForum === "forum" && <Message id={id.id} nickName={userName} />}
         {LogOrForum === "forum" && <Posts posts={lighter.messages} />}
-        {LogOrForum === "log" && <Logs logs={lighter.log}/>}
+        {LogOrForum === "log" && <Logs logs={lighter.log} />}
       </div>
     </div>
   );

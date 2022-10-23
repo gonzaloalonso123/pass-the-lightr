@@ -16,13 +16,16 @@ function Intro({
   };
 
   const handleClick = () => {
-    console.log(nickname);
     if (nickname === "") {
       setShowNameTheLighter(true);
     } else {
       setShowDidYouFindMe(true);
     }
-    setUserName(input);
+    if (input == "") {
+      setUserName("Anonymous");
+    } else {
+      setUserName(input);
+    }
   };
 
   return (

@@ -3,15 +3,15 @@ import "./SomeStats.css";
 import Database from "../../../database/db-connection";
 
 function SomeStats() {
-  const [amountlighters, setAmountLighters] = useState("0");
+  const [metadata, setMetadata] = useState(null);
 
   const database = new Database();
   useEffect(() => {
-    getAmountOfLighters();
+    getMetadata();
   });
 
-  const getAmountOfLighters = async () => {
-    setAmountLighters(await database.getAmountOfLighters());
+  const getMetadata = async () => {
+    setMetadata(await database.getMetadata());
   };
 
   const getTotalPassedFound = async () => {
@@ -25,14 +25,14 @@ function SomeStats() {
   return (
     <div className="some-stats-container">
       <div className="someStat one">
-        TOTAL KM<h1>11231</h1>
+        TOTAL KM<h1>{metadata != null ? metadata.totalKm : 0}</h1>
       </div>
       <div className="downStatsContainer">
         <div className="someStat">
-          TOTAL PASSED<h1>1182</h1>
+          TOTAL PASSED<h1>{metadata != null ?metadata.totalPassed : 0}</h1>
         </div>
         <div className="someStat">
-          TOTAL LIGHTERS<h1>{amountlighters}</h1>
+          TOTAL LIGHTERS<h1>{metadata != null ?metadata.totalLighters : 0}</h1>
         </div>
       </div>
     </div>

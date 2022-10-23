@@ -13,16 +13,14 @@ function TrackIt({ setShowDev }) {
     if (input == "wesmokedhope%") {
       setShowDev(true);
     } else {
-      const lighters = await database.getLighters();
-      console.log(lighters);
-
-      lighters.forEach((lighter) => {
-        if(lighter.id === input){
-          navigate(`lighter/${input}`);
-          return;
-        }
-      })
+      const lighter = await database.getOneLighter(input);
+      console.log(lighter);
+      if(lighter == null){
         setWrongId(true);
+      }
+      else{
+        navigate(`lighter/${input}`);
+      }
     }
   }
 

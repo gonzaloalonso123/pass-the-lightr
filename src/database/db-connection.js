@@ -11,11 +11,12 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import writeXlsxFile from "write-excel-file";
-
 export default class databaseAccess {
+
+  metadataKey = "tP8pFfOA8QMPfaxMgNze";
   constructor() {
     this.firebaseConfig = {
-      apiKey: "AIzaSyAatZER7xu9iLd70W9-9oakWt-dack6RlI",
+      apiKey: process.env.REACT_APP_FIREBASE_KEY,
       authDomain: "pass-lighter.firebaseapp.com",
       projectId: "pass-lighter",
       storageBucket: "pass-lighter.appspot.com",
@@ -32,7 +33,8 @@ export default class databaseAccess {
     return querySnapshot._snapshot.docChanges.length;
   }
 
-  saveLog() {}
+  saveLog() {
+  }
 
   async getLighters() {
     // const lightersCol = collection(this.db, "lighters");
@@ -49,7 +51,23 @@ export default class databaseAccess {
   }
 
   async getOneLighter(id) {
-    return doc(this.db, "lighters", id);
+    const docRef = doc(this.db, "lighters", id);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      return docSnap.data();
+    } else {
+      return null;
+    }
+  }
+
+  async getMetadata(){
+    const docRef = doc(this.db, "metadata", this.metadataKey);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      return docSnap.data();
+    } else {
+      return null;
+    }
   }
 
   async createLighter(userId) {
@@ -104,15 +122,16 @@ export default class databaseAccess {
     });
   }
 
-  async submitLog (id, nickname, how, when, where) 
-  {
+  async submitLog(id, nickname, how, when, where) {
     const lightersRef = doc(this.db, "lighters", id);
+    let stringDate = `${when.getDate()}/${when.getMonth()}/${when.getFullYear()}`;
+    
     await updateDoc(lightersRef, {
-      logs: arrayUnion({
-        nickname : nickname,
-        how : how,
-        when : when,
-        where : where
+      log: arrayUnion({
+        nickname: nickname,
+        how: how,
+        when: stringDate,
+        where: where,
       }),
     });
   }

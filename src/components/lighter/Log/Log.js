@@ -1,17 +1,38 @@
-import React from 'react';
-import './Log.css';
+import React, { useState } from "react";
+import { useEffect } from "react";
+import "./Log.css";
+import Geocode from "react-geocode";
 
+const Log = ({ log }) => {
 
+  const [locationName, setLocationName] = useState("");
 
-function Log( date, username) {
+  useEffect(() => {
+    Geocode.setApiKey(process.env.REACT_APP_GOOGLE_KEY);
+    Geocode.setLanguage("en");
+    Geocode.setLocationType("ROOFTOP");
+    Geocode.enableDebug();
+
+    console.log(log);
+    Geocode.fromLatLng(log.where.lat, log.where.lng).then(
+      (response) => {
+        setLocationName(response.results[0].formatted_address);
+      },
+      (error) => {
+        console.error(error);
+        setLocationName("Unknown");
+      }
+    );
+  }, []);
+
   return (
-    <div className='xdprueba'>
-        {/*<label howwasfound='codelighter'>dasdhkahf</label>*/}
-        <label className='date'>{date}</label>
-         {/*<label className='location'>dlkwj</label>*/}
-        <label className='username'>{username}</label>
+    <div className="log">
+      <label className="tag">{log.when}</label>
+      <label className="tag">{log.nickname + " got the lighter"}</label>
+      <label className="tag">{"How?    " + log.how}</label>
+      <label className="tag">{"Where?    " + locationName}</label>
     </div>
-  )
-}
+  );
+};
 
 export default Log;
