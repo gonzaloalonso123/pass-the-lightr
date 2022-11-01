@@ -12,7 +12,6 @@ import {
 } from "firebase/firestore";
 import writeXlsxFile from "write-excel-file";
 export default class databaseAccess {
-
   metadataKey = "tP8pFfOA8QMPfaxMgNze";
   constructor() {
     this.firebaseConfig = {
@@ -33,8 +32,7 @@ export default class databaseAccess {
     return querySnapshot._snapshot.docChanges.length;
   }
 
-  saveLog() {
-  }
+  saveLog() {}
 
   async getLighters() {
     // const lightersCol = collection(this.db, "lighters");
@@ -60,7 +58,7 @@ export default class databaseAccess {
     }
   }
 
-  async getMetadata(){
+  async getMetadata() {
     const docRef = doc(this.db, "metadata", this.metadataKey);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
@@ -125,7 +123,7 @@ export default class databaseAccess {
   async submitLog(id, nickname, how, when, where) {
     const lightersRef = doc(this.db, "lighters", id);
     let stringDate = `${when.getDate()}/${when.getMonth()}/${when.getFullYear()}`;
-    
+
     await updateDoc(lightersRef, {
       log: arrayUnion({
         nickname: nickname,
@@ -135,6 +133,20 @@ export default class databaseAccess {
       }),
     });
   }
+
+  async getAllFoundFighters() {
+    const lighters = await this.getLighters();
+
+    lighters.forEach((lighter) => {
+      try{
+      if (lighter.log.length > 0 && lighter.messages.length > 0) {
+        console.log(lighter);
+      }}catch{
+        
+      }
+    });
+  }
+
   // async randomCodeGenerator(number) {
   //   let objects = [];
   //   for (let i = 0; i < number; i++) {

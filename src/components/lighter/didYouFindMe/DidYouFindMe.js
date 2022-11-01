@@ -12,10 +12,12 @@ function DidYouFindMe({
       case "1":
         setDidYouFindMeAnswer("found");
         setShowMap(true);
+        setShowHowInput(false);
         break;
-      case "2":
-        setDidYouFindMeAnswer("got");
-        setShowMap(true);
+        case "2":
+          setDidYouFindMeAnswer("got");
+          setShowMap(true);
+          setShowHowInput(false);
         break;
       case "3":
         setDidYouFindMeAnswer("other");

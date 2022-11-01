@@ -24,6 +24,8 @@
 .someStat{
     border-radius: 50%;
     background-color: white;
+    background-image: url("../../../images/TOTALKM.png");
+    background-size: contain;
     margin: auto 1vw;
     height: 30vw;
     width: 30vw;

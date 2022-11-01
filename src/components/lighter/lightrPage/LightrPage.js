@@ -51,7 +51,7 @@ function LightrPage() {
     } else {
       window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
     }
-  }, [whereAnswer, datePicked, submited, LogOrForum, userName, showHowInput]);
+  },[ datePicked, submited, LogOrForum, userName, showHowInput]);
 
   return (
     <div className="home-container">

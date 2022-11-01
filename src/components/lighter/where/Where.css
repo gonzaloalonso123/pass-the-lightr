@@ -3,7 +3,18 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 100%;
+    width: 90vw;
+    height: 90vw;
+    max-width: 600px;
+    max-height: 600px;
+    border: 2px solid black;
+    border-radius: 5%;
+    margin-top: 5vh;
+}
+
+.map-input-container {
+    width: 450px;
+    height: 500px;
 }
 
 .button-container.location{
@@ -12,12 +23,6 @@
 
 .input.location {
     width: 30%;
-}
-
-.map {
-    border: 2px solid black;
-    border-radius: 5%;
-    margin-top: 5vh;
 }
 
 .button-container.location label{

@@ -10,8 +10,8 @@
 .who-created-container {
     display: flex;
     align-items: center;
-    justify-content: center;
     padding-bottom: 50px;
+    justify-content: center;
 }
 
 .who-created h2 {
@@ -28,5 +28,5 @@
 
 .who-created p {
     font-size: 1.5em;
-    text-align: center;
+    text-align: left;
 }

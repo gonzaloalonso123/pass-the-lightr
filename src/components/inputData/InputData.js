@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import Database from '../../database/db-connection';
 import './InputData.css';
+// import "../lighter/where/locationPicker3";
 
 function InputData() {
   const [input, setInput] = useState(null);
   const database = new Database();
+  database.getAllFoundFighters();
 
   const handleInput = (event) => {
     setInput(event.target.value);
@@ -12,7 +14,9 @@ function InputData() {
 
   const createLighter = () => {
     // database.createLighter(input);
-    database.createLighter(input);
+    // const locationPicker = new  locationPicker3();
+    // locationPicker.initMap();
+
   };
 
   return (
@@ -22,7 +26,7 @@ function InputData() {
       <button className="standar-button" onClick={createLighter}>
         enter
       </button>
-      <button onClick={() => console.log(database.getLighters())}>print all</button>
+      <button onClick={() => database.getAllFoundFighters}>print all</button>
     </div>
   );
 }

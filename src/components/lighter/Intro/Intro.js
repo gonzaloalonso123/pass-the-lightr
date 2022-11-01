@@ -36,7 +36,7 @@ function Intro({
         <input
           type="text"
           className="input"
-          defaultValue="NickName"
+          defaultValue="Your Nickname"
           onChange={handleInput}
         />
         <button className="standar-button" onClick={handleClick}>

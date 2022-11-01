@@ -1,71 +1,87 @@
 import React, { useEffect, useState } from "react";
-
-import MapPicker from "react-google-map-picker";
 import "./Where.css";
+import {
+  GoogleMap,
+  useLoadScript,
+  Marker,
+  StandaloneSearchBox,
+} from "@react-google-maps/api";
 
-const DefaultLocation = { lat: 52.37, lng: 4.89 };
-const DefaultZoom = 10;
+function LocationPicker({ setWhereAnswer }) {
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_KEY,
+    libraries: ["places"],
+  });
+  if (!isLoaded) return <div>Loading...</div>;
+  return <Map setWhereAnswer={setWhereAnswer} />;
+}
 
-const LocationPicker = ({ setWhereAnswer }) => {
-  const [defaultLocation, setDefaultLocation] = useState(DefaultLocation);
-  const [location, setLocation] = useState(defaultLocation);
-  const [zoom, setZoom] = useState(DefaultZoom);
+function Map({ setWhereAnswer }) {
+  const [selectedLng, setSelectedLng] = useState(9);
+  const [selectedLat, setSelectedLat] = useState(47);
+  const [markerVisible, setMarkerVisible] = useState(false);
+  const [searchedPlace, setSearchedPlace] = useState("");
+  const [searchBox, setSearchBox] = useState(null);
+  const onLoad = (ref) => setSearchBox(ref);
+  const onPlacesChanged = () => {
+    let place = searchBox.getPlaces()[0];
+    setSelectedLat(place.geometry.location.lat());
+    setSelectedLng(place.geometry.location.lng());
+    setWhereAnswer({ name: searchedPlace, lat: selectedLat, lng: selectedLng });
+  };
 
-  function handleChangeLocation(lat, lng) {
-    setLocation({ lat: lat, lng: lng });
-    setWhereAnswer({ lat: lat, lng: lng });
-  }
+  const handleInput = (event) => {
+    setSearchedPlace(event.target.value);
+  };
 
-  function handleChangeZoom(newZoom) {
-    setZoom(newZoom);
-  }
-
-  useEffect(() => window.scrollTo({
-    top: document.body.scrollHeight,
-    behavior: "smooth",
-  }))
-
-  function handleResetLocation() {
-    setDefaultLocation({ ...DefaultLocation });
-    setZoom(DefaultZoom);
-  }
+  const mapClicked = (e) => {
+    setSelectedLat(e.latLng.lat());
+    setSelectedLng(e.latLng.lng(), setMarkerVisible(true));
+    setWhereAnswer({
+      name: "",
+      searchedPlacelat: selectedLat,
+      lng: selectedLng,
+    });
+  };
 
   return (
-    <>
-      <div className="map-container">
-        <div className="button-container location">
-          {/* <button onClick={handleResetLocation}>Reset Location</button> */}
-          <label>Lat:</label>
-          <button className="input" disabled>
-            {location.lat.toFixed(4)}
-          </button>
-          <label>Lon:</label>
-          <button className="input" disabled>
-            {location.lng.toFixed(4)}
-          </button>
-          <label>Zoom:</label>
-          <button className="input" disabled>
-            {zoom}
-          </button>
-        </div>
-        <MapPicker
-          defaultLocation={defaultLocation}
-          zoom={zoom}
-          mapTypeId="roadmap"
-          className="map"
+    <GoogleMap
+      onClick={mapClicked}
+      zoom={4}
+      center={{ lat: selectedLat, lng: selectedLng }}
+      mapContainerClassName="map-container"
+    >
+      <StandaloneSearchBox
+        onLoad={onLoad}
+        onPlacesChanged={onPlacesChanged}
+        libraries={["places"]}
+      >
+        <input
+          type="text"
+          placeholder="Where did you get it?"
+          onChange={handleInput}
           style={{
-            height: "70vw",
-            width: "80vw",
-            maxHeight: "400px",
-            maxWidth: "500px",
+            boxSizing: `border-box`,
+            border: `1px solid transparent`,
+            width: `240px`,
+            height: `32px`,
+            padding: `0 12px`,
+            borderRadius: `3px`,
+            boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
+            fontSize: `14px`,
+            outline: `none`,
+            textOverflow: `ellipses`,
+            top: "0",
+            position: "absolute",
+            left: "50%",
+            marginLeft: "-120px",
           }}
-          onChangeLocation={handleChangeLocation}
-          onChangeZoom={handleChangeZoom}
-          apiKey= {process.env.REACT_APP_GOOGLE_KEY}
         />
-      </div>
-    </>
+      </StandaloneSearchBox>
+      {markerVisible && (
+        <Marker position={{ lat: selectedLat, lng: selectedLng }} />
+      )}
+    </GoogleMap>
   );
-};
-
+}
 export default LocationPicker;

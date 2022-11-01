@@ -30,7 +30,7 @@ function TrackIt({ setShowDev }) {
   return (
     <div style={{ height: "15vh" }}>
       <div className="track-it-container">
-        <input type="text" className="input" onChange={handleInput} />
+        <input type="text" className="input" defaultValue = "Your code" onChange={handleInput} />
         <button className="standar-button" onClick={validateCode}>
           Track it!
         </button>

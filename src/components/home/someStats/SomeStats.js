@@ -25,14 +25,14 @@ function SomeStats() {
   return (
     <div className="some-stats-container">
       <div className="someStat one">
-        TOTAL KM<h1>{metadata != null ? metadata.totalKm : 0}</h1>
+        <h1>{metadata != null ? metadata.totalKm : 0}</h1>
       </div>
       <div className="downStatsContainer">
         <div className="someStat">
-          TOTAL PASSED<h1>{metadata != null ?metadata.totalPassed : 0}</h1>
+          <h1>{metadata != null ? metadata.totalPassed : 0}</h1>
         </div>
         <div className="someStat">
-          TOTAL LIGHTERS<h1>{metadata != null ?metadata.totalLighters : 0}</h1>
+          <h1>{metadata != null ? metadata.totalLighters : 0}</h1>
         </div>
       </div>
     </div>

@@ -11,7 +11,7 @@ function Home() {
       <div className="component-container">
         <Header showDev={showDev} />
         <TrackIt setShowDev={setShowDev} />
-        <SomeStats />
+        {/* <SomeStats /> */}
         <WhoCreated />
       </div>
     </div>

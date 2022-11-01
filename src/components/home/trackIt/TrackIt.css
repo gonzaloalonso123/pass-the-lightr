@@ -2,17 +2,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50%;
+  flex-direction: column;
+  height: 100%;
   margin-top: 3vh;
   margin-bottom: 3vh;
 }
 
 .track-it-container button{
-  width: 40%;
+  width: 100%;
+  color: black;
 }
 
 .track-it-container input {
-  width: 40%;
+  width: 100%;
 }
 
 .error {
