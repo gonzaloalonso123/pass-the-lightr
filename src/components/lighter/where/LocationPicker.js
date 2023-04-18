@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Where.css";
 import {
   GoogleMap,
@@ -19,15 +19,19 @@ function LocationPicker({ setWhereAnswer }) {
 function Map({ setWhereAnswer }) {
   const [selectedLng, setSelectedLng] = useState(9);
   const [selectedLat, setSelectedLat] = useState(47);
-  const [markerVisible, setMarkerVisible] = useState(false);
   const [searchedPlace, setSearchedPlace] = useState("");
   const [searchBox, setSearchBox] = useState(null);
+  const inputRef = useRef(null);
   const onLoad = (ref) => setSearchBox(ref);
   const onPlacesChanged = () => {
     let place = searchBox.getPlaces()[0];
     setSelectedLat(place.geometry.location.lat());
     setSelectedLng(place.geometry.location.lng());
-    setWhereAnswer({ name: searchedPlace, lat: selectedLat, lng: selectedLng });
+    setWhereAnswer({
+      name: inputRef.current.value,
+      lat: place.geometry.location.lat(),
+      lng: place.geometry.location.lng(),
+    });
   };
 
   const handleInput = (event) => {
@@ -36,11 +40,11 @@ function Map({ setWhereAnswer }) {
 
   const mapClicked = (e) => {
     setSelectedLat(e.latLng.lat());
-    setSelectedLng(e.latLng.lng(), setMarkerVisible(true));
+    setSelectedLng(e.latLng.lng());
     setWhereAnswer({
       name: "",
-      searchedPlacelat: selectedLat,
-      lng: selectedLng,
+      lat: e.latLng.lat(),
+      lng: e.latLng.lng(),
     });
   };
 
@@ -57,6 +61,7 @@ function Map({ setWhereAnswer }) {
         libraries={["places"]}
       >
         <input
+          ref={inputRef}
           type="text"
           placeholder="Where did you get it?"
           onChange={handleInput}
@@ -78,9 +83,7 @@ function Map({ setWhereAnswer }) {
           }}
         />
       </StandaloneSearchBox>
-      {markerVisible && (
-        <Marker position={{ lat: selectedLat, lng: selectedLng }} />
-      )}
+      <Marker position={{ lat: selectedLat, lng: selectedLng }} />
     </GoogleMap>
   );
 }

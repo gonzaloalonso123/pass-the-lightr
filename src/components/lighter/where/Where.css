@@ -1,39 +1,41 @@
 .map-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 90vw;
-    height: 90vw;
-    max-width: 600px;
-    max-height: 600px;
-    border: 2px solid black;
-    border-radius: 5%;
-    margin-top: 5vh;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 90vw;
+  height: 90vw;
+  max-width: 600px;
+  max-height: 550px;
+  border: 2px solid black;
+  border-radius: 5%;
+  margin-top: 5vh;
+  margin-bottom: 20px;
 }
 
 .map-input-container {
-    width: 450px;
-    height: 500px;
+  width: 450px;
+  height: 500px;
 }
 
-.button-container.location{
-    align-items: center;
+.button-container.location {
+  align-items: center;
 }
 
 .input.location {
-    width: 30%;
+  width: 30%;
 }
 
-.button-container.location label{
-    color: white;
+.button-container.location label {
+  color: white;
 }
 
 .button-container.where {
-    justify-content: center;
+  justify-content: center;
 }
 
-.map-canvas  {
-    width: 400px;
-    height: 400px;
+.map-canvas {
+  width: 400px;
+  height: 400px;
 }

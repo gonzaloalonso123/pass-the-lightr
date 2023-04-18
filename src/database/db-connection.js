@@ -120,17 +120,21 @@ export default class databaseAccess {
     });
   }
 
-  async submitLog(id, nickname, how, when, where) {
+  async submitLog(id, nickname, how, when, where, message, distanceTraveled) {
     const lightersRef = doc(this.db, "lighters", id);
     let stringDate = `${when.getDate()}/${when.getMonth()}/${when.getFullYear()}`;
 
+    console.log(nickname, how, when, where, message);
     await updateDoc(lightersRef, {
       log: arrayUnion({
         nickname: nickname,
         how: how,
         when: stringDate,
         where: where,
-      }),
+        message: message
+      },
+      ),
+      distanceTraveled : distanceTraveled,
     });
   }
 
@@ -142,7 +146,7 @@ export default class databaseAccess {
       if (lighter.log.length > 0 && lighter.messages.length > 0) {
         console.log(lighter);
       }}catch{
-        
+
       }
     });
   }

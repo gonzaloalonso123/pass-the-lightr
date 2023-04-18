@@ -1,21 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./DidYouFindMe.css";
 
-function How({ setDidYouFindMe , setShowMap}) {
-
-  const [input, setInput] = useState("");
+function How({ setDidYouFindMe }) {
   const handleInput = (e) => {
-    setInput(e.target.value);
+    setDidYouFindMe(e.target.value);
   };
-
-  const handleClick = () => {
-    setDidYouFindMe(input);
-    setShowMap(true);
-  };
-
-  useEffect(() => {
-      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
-  }, [])
 
   return (
     <div className="lighterPageSection">
@@ -25,9 +14,6 @@ function How({ setDidYouFindMe , setShowMap}) {
         className="input how"
         defaultValue="How?"
       />
-      <button className="standar-button" onClick={handleClick}>
-        Ok
-      </button>
     </div>
   );
 }

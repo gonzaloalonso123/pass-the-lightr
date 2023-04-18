@@ -1,27 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import "./DidYouFindMe.css";
+import How from "./How";
 
 function DidYouFindMe({
   setDidYouFindMeAnswer,
-  didYouFindMeAnswer,
-  setShowHowInput,
-  setShowMap
+  didYouFindMeAnswer
 }) {
+  const [howEnabled, setHowEnabled] = useState(false);
   const handleClick = (code) => {
     switch (code) {
       case "1":
         setDidYouFindMeAnswer("found");
-        setShowMap(true);
-        setShowHowInput(false);
+        setHowEnabled(false);
         break;
-        case "2":
-          setDidYouFindMeAnswer("got");
-          setShowMap(true);
-          setShowHowInput(false);
+      case "2":
+        setDidYouFindMeAnswer("got");
+        setHowEnabled(false);
         break;
       case "3":
         setDidYouFindMeAnswer("other");
-        setShowHowInput(true);
+        setHowEnabled(true);
         break;
     }
   };
@@ -60,6 +58,7 @@ function DidYouFindMe({
           Other
         </button>
       </div>
+      {howEnabled && <How setDidYouFindMe={setDidYouFindMeAnswer}/>}
     </div>
   );
 }

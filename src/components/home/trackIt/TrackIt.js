@@ -30,9 +30,9 @@ function TrackIt({ setShowDev }) {
   return (
     <div style={{ height: "15vh" }}>
       <div className="track-it-container">
-        <input type="text" className="input" defaultValue = "Your code" onChange={handleInput} />
+        <input type="text" className="input" placeholder="Your code" onChange={handleInput} />
         <button className="standar-button" onClick={validateCode}>
-          Track it!
+          Track it
         </button>
       </div>
       {wrongId && <h2 className="error">The provided ID does not exist.</h2>}
